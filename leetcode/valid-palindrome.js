@@ -1,5 +1,7 @@
-
 var isPalindrome = function (s) {
-  const input = s.toLowerCase().split(/[^A-Za-z0-9]/).join('');
-  return input === input.split('').reverse().join('');
-};
+  s = s.toLowerCase().replace(/[^0-9a-z]/gi, '')
+  for (let i = 0; i < Math.floor(s.length / 2); i++) {
+    if (s[i] !== s[s.length - 1 - i]) return false;
+  }
+  return true;
+}
