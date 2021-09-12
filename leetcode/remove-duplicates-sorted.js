@@ -1,3 +1,7 @@
+/* Constant memory usage, improved efficiency.
+Uses a variable to keep track of index with no duplicates. If the next number is not
+a duplicate, replace the element at tracked index with new value.
+*/
 var removeDuplicates = function (nums) {
   let index = 1;
   for (let i = 1; i < nums.length; i++) {
