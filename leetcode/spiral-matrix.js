@@ -1,4 +1,23 @@
-// First solution attempt
+// Second solution
+var spiralOrder = function (matrix) {
+  const result = [];
+
+  while (matrix.length) {
+    const first = matrix.shift();
+    result.push(...first)
+    for (const m of matrix) {
+      const val = m.pop();
+      if (val) {
+        result.push(val);
+        m.reverse();
+      }
+    }
+    matrix.reverse();
+  }
+  return result;
+};
+
+// First solution attempt; Only works on square matrices.
 /*
 let colStart = 0,
         rowStart = 0;
