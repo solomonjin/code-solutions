@@ -18,9 +18,7 @@ var maxArea = function (height) {
     const w = r - l;
     const h = Math.min(height[l], height[r]);
     const area = w * h;
-    max = area > max
-      ? area
-      : max;
+    max = Math.max(area, max)
     if (height[l] >= height[r]) r--;
     else l++;
   }
