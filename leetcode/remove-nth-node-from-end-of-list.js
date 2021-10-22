@@ -1,4 +1,36 @@
 /*
+Two pointer approach:
+Create a fast and slow pointer at the head
+Start the fast pointer n nodes ahead of slow
+If the fast node is null, then return head.next (checks if n is greater than or equal to
+length of the list)
+Traverse through the linked list, incrementing both slow and fast nodes at the same pace
+When the fast node reaches the end of the list, the slow pointer will be at the node n places
+from the end of the list
+
+remove the desired node and return the head
+*/
+
+var removeNthFromEnd = function (head, n) {
+  let fast = slow = head;
+  let count = 0;
+  while (count < n) {
+    fast = fast.next;
+    count++;
+  }
+
+  if (!fast) return head.next;
+  while (fast.next) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+
+  slow.next = slow.next.next;
+  return head;
+};
+
+
+/*
 First, get the length of the LinkedList by passing through it once and keeping count
 
 If the length of the list is 1, just return head.next
