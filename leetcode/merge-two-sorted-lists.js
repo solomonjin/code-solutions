@@ -15,15 +15,11 @@ var mergeTwoLists = function (l1, l2) {
     }
     sorted = sorted.next;
   }
-  while (first) {
-    sorted.next = new ListNode(first.val, null);
-    sorted = sorted.next;
-    first = first.next;
+  if (first) {
+    sorted.next = first
   }
-  while (second) {
-    sorted.next = new ListNode(second.val, null);
-    sorted = sorted.next;
-    second = second.next;
+  if (second) {
+    sorted.next = second
   }
   return dummy.next;
 };
