@@ -16,7 +16,7 @@ var isAnagram = function (s, t) {
     second[t[i]] = (second[t[i]] || 0) + 1;
   }
 
-  for (let letter in first) {
+  for (const letter in first) {
     if (first[letter] !== second[letter]) return false;
   }
 
