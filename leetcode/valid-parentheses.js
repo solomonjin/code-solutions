@@ -22,3 +22,22 @@ var isValid = function (s) {
   if (stack.length === 0) return true;
   return false;
 };
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const queue = [];
+  const pairs = {
+    ')': '(',
+    '}': '{',
+    ']': '[',
+  }
+  for (const c of s) {
+    if (!pairs[c]) queue.push(c);
+    else if (pairs[c] !== queue[queue.length - 1]) return false;
+    else queue.pop();
+  }
+  return queue.length === 0;
+};
