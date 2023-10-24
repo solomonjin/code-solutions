@@ -1,9 +1,7 @@
 // Second solution. Seems to take about the same time.
 var mergeTwoLists = function (l1, l2) {
-  const dummy = new ListNode(0, null);
-  let sorted = dummy;
-  let first = l1;
-  let second = l2;
+  const dummyHead = new ListNode(0, null);
+  let [sorted, first, second] = [dummyHead, l1, l2];
 
   while (first && second) {
     if (first.val <= second.val) {
@@ -15,15 +13,10 @@ var mergeTwoLists = function (l1, l2) {
     }
     sorted = sorted.next;
   }
-  if (first) {
-    sorted.next = first
-  }
-  if (second) {
-    sorted.next = second
-  }
-  return dummy.next;
+  if (first) sorted.next = first;
+  if (second) sorted.next = second;
+  return dummyHead.next;
 };
-
 
 // First solution
 // var mergeTwoLists = function (l1, l2) {
