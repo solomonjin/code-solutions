@@ -13,10 +13,9 @@ remove the desired node and return the head
 
 var removeNthFromEnd = function (head, n) {
   let fast = slow = head;
-  let count = 0;
-  while (count < n) {
+  while (n > 0) {
     fast = fast.next;
-    count++;
+    n--;
   }
 
   if (!fast) return head.next;
@@ -24,8 +23,8 @@ var removeNthFromEnd = function (head, n) {
     slow = slow.next;
     fast = fast.next;
   }
-
   slow.next = slow.next.next;
+
   return head;
 };
 
