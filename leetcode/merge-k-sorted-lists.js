@@ -6,41 +6,40 @@ Loop will end when there is only one merged list remaining in the main list
 return the result
 
 Time complexity: O(nlogk)
+
+In short, sort and merge the lists two at a time until there is only one left.
 */
 
 var mergeKLists = function (lists) {
-  if (!lists || lists.length === 0) return null;
+  if (lists.length === 0) return null;
 
   while (lists.length > 1) {
     const l1 = lists.shift();
     const l2 = lists.shift();
-    const mergedList = mergeList(l1, l2);
-    lists.push(mergedList)
+    const merged = mergeLists(l1, l2);
+    lists.push(merged);
   }
-  return lists[0]
+
+  return lists[0];
 };
 
-const mergeList = (list1, list2) => {
-  const dummy = new ListNode(0, null);
-  let sorted = dummy;
+const mergeLists = (l1, l2) => {
+  const dummy = new ListNode();
+  let merged = dummy;
 
-  while (list1 && list2) {
-    if (list1.val <= list2.val) {
-      sorted.next = list1;
-      list1 = list1.next;
+  while (l1 && l2) {
+    if (l1.val <= l2.val) {
+      merged.next = l1;
+      l1 = l1.next;
     } else {
-      sorted.next = list2;
-      list2 = list2.next;
+      merged.next = l2;
+      l2 = l2.next;
     }
-    sorted = sorted.next;
+    merged = merged.next;
   }
 
-  if (list1) {
-    sorted.next = list1
-  }
-  if (list2) {
-    sorted.next = list2;
-  }
+  if (l1) merged.next = l1;
+  if (l2) merged.next = l2;
 
   return dummy.next;
 }
