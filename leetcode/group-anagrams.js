@@ -1,17 +1,25 @@
 /*
-First solution. Pure hash map. Create an array with indexes for each letter in alphabet.
-For each given string, convert each character in the string to a letter index a=0, b=1, etc
+Go through each string in input array and get character counts of each by
+getting the character code of each char in str and subtracting 97 in order to
+map the letters of the alphabet to array indices (count).
+
+Encode the count array of the string (which contains the number of each char of alphabet in str)
+Then use encoded string count to map it to the result object.
+If the encoded key already exists in result map, then push it into the array
+otherwise, create a new array key with the given str.
 */
 var groupAnagrams = function (strs) {
   const res = {};
 
-  for (const s of strs) {
-    const count = new Array(26).fill(0);
-    for (const c of s) {
-      count[c.charCodeAt() - 97]++;
+  for (const s of strs) {                     // Go through each givn string
+    const count = new Array(26).fill(0);    // Create an array mapping each char in alphabet to an index
+    for (const c of s) {                    // For each char in a given string...
+      count[c.charCodeAt() - 97]++;       // Increment the count of each char in the count array
     }
-    const key = count.join('#');
-    res[key] ? res[key].push(s) : res[key] = [s];
+
+    const key = count.join('#');            // Create a encoded key which can be used to identify how many of each chars are in a given string
+    if (!res[key]) res[key] = [s];
+    else res[key].push(s);
   }
   return Object.values(res);
 };

@@ -12,7 +12,8 @@ var topKFrequent = function (nums, k) {
 
   // Map each values according to the index of their count number
   // e.g. if a number appeared 3 times, map it to index 3
-  for (const [key, value] of Object.entries(map)) {
+  for (const key in map) {
+    const value = map[key];
     if (!frequency[value]) frequency[value] = [];
     frequency[value].push(key);
   }
