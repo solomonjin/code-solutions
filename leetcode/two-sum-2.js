@@ -3,17 +3,23 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function (numbers, target) {
-  let [left, right] = [0, numbers.length - 1];
+/*
+Two-Pointer Solution:
+Set left and right pointers at first and last values of the array
+Check to see if the sum of the values at left/right pointers === target
+If the sum === target, solution is found
+If the sum is less than the target, increment left pointer
+If the sum is greater than the target, decrement right pointer
+*/
 
-  while (left <= right) {
-    const sum = numbers[left] + numbers[right];
-    if (sum === target) return [left + 1, right + 1];
-    if (sum < target) {
-      left++;
-    } else {
-      right--;
-    }
+var twoSum = function (numbers, target) {
+  let [l, r] = [0, numbers.length - 1];
+
+  while (l <= r) {
+    const sum = numbers[l] + numbers[r];
+    if (sum === target) return [l + 1, r + 1];
+    if (sum < target) l++;
+    else r--;
   }
 };
 
