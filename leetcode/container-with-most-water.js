@@ -31,12 +31,13 @@ var maxArea = function (height) {
   let [l, r] = [0, height.length - 1];
 
   while (l < r) {
-    const h = Math.min(height[l], height[r]);
-    const w = r - l;
-    const area = h * w;
-    max = Math.max(area, max);
-    if (height[l] < height[r]) l++;
+    const h = Math.min(height[l], height[r]);       // Set height of rectangle equal to the lowest of l and r pointers
+    const w = r - l;                                // width of rectangle is the distance between l and r pointers
+    const area = h * w;                             // Calc the area with the width and height
+    max = Math.max(max, area);                      // Update the max variable with the highest value;
+    if (height[l] < height[r]) l++;                 // Update left and right pointers
     else r--;
   }
+
   return max;
 };
