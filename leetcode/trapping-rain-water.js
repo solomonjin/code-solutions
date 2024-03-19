@@ -41,18 +41,19 @@ and then update the max value. Then calculate how much rain could be at the new 
 */
 var trap = function (height) {
   if (height.length === 0) return 0;
-  let total = 0;
+
   let [l, r] = [0, height.length - 1];
   let [leftMax, rightMax] = [height[l], height[r]];
+  let total = 0;
 
-  while (l < r) {
-    if (leftMax <= rightMax) {
+  while (l < r) {                                             // Amount of raindrop at a given location is bottle-necked by the min of left/right boundaries
+    if (leftMax <= rightMax) {                              // If our leftMax is the smallest/equal, increment the left pointer
       l++;
-      leftMax = Math.max(leftMax, height[l]);
-      total += leftMax - height[l];
-    } else {
+      leftMax = Math.max(leftMax, height[l]);             // Update our leftMax. Also helps us not add any negative numbers into our total
+      total += leftMax - height[l];                       // If current space is our new leftMax, we add 0 since no rain can be captured at this index
+    } else {                                                // Otherwise, we add the difference between the leftMax and current height to our total
       r--;
-      rightMax = Math.max(rightMax, height[r]);
+      rightMax = Math.max(rightMax, height[r]);           // Same thing, but if the right pointer was our bottle-neck
       total += rightMax - height[r];
     }
   }
