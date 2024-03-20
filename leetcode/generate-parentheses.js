@@ -1,27 +1,37 @@
+/*
+Backtrack Solution:
+- Create an empty array to use as a stack to keep track of parentheses
+- as well as a result array to store all valid parentheses pairs
+- Create backtrack function that will recursively create parentheses pairs
+- Base case: # of open parentheses equal to n and number of open is equal to number of closed (we've found a valid parentheses generation)
+- Otherwise, if we can add another open parentheses (n is less than # of open), add another open parentheses to stack and recursively call the next backtrack
+- Then, check if we can add another close parentheses (num closed < num open), add another close parentheses then recursively check again.
+- Must pop out the last added parentheses from stack after each recursive call to clean-up the stack
+*/
 var generateParenthesis = function (n) {
   const stack = [];
   const result = [];
 
-  const backtrack = (open, close) => {
-    if (open === n && open === close) {
-      result.push(stack.join(''));
+  const generateParentheses = (open, close) => {
+    if (open === n && open === close) {         // Base Case. Found a valid parentheses generation.
+      result.push(stack.join(''));            // Add the valid parentheses as a string into our result array
       return;
     }
 
-    if (open < n) {
+    if (open < n) {                             // Add another open parenth if possible
       stack.push('(');
-      backtrack(open + 1, close);
+      generateParentheses(open + 1, close);
       stack.pop();
     }
 
-    if (close < open) {
+    if (close < open) {                         // Add another close parentheses if possible
       stack.push(')');
-      backtrack(open, close + 1);
+      generateParentheses(open, close + 1);
       stack.pop();
     }
   }
 
-  backtrack(0, 0);
+  generateParentheses(0, 0);
   return result;
 };
 
