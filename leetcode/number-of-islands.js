@@ -70,3 +70,34 @@ var numIslands = function (grid) {
 
   return numIslands;
 };
+
+/*
+DFS Approach:
+- base case: if the current tile is out of bounds or if current tile is water, can return 0
+- Otherwise, can change the current land tile to water to avoid revisiting the same tiles
+- Then, dfs in each direction to find more land tiles, eventually flipping all land to water
+- Once all connecting lands have been found, one full island has been found so can return 1
+- After the DFS method has been defined, just go through the input grid and check each tile for an island using the method
+*/
+var numIslands = function (grid) {
+  let res = 0;
+  const [rows, cols] = [grid.length, grid[0].length];
+
+  const dfs = (r, c) => {
+    if (r >= rows || r < 0 || c >= cols || c < 0 || grid[r][c] === '0') return 0;   // Base case: current tile out of bounds or is water. No island to be found
+
+    grid[r][c] = '0';       // Change current land to water to avoid revisiting same land tiles
+    dfs(r + 1, c);          // Check all neighboring tiles for more land tiles
+    dfs(r - 1, c);
+    dfs(r, c + 1);
+    dfs(r, c - 1);          // Once all the recursive calls have returned, all connecting lands have been turned into water
+    return 1;               // This means that we have found one full island and can return 1 island count
+  }
+
+  for (let r = 0; r < rows; r++) {        // Go through grid, checking each tile for islands
+    for (let c = 0; c < cols; c++) {
+      res += dfs(r, c);
+    }
+  }
+  return res;
+};
